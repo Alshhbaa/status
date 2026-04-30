@@ -21,7 +21,6 @@ status-website:
   name: نحاسيات الشهباء
   logoUrl: https://alshhbaa.com/assets/logo-gold.svg
   favicon: https://alshhbaa.com/assets/favicons/favicon-48.png
-  themeUrl: /alshhbaa-theme.css
   introTitle: "**نحاسيات الشهباء** — حالة الخدمات"
   introMessage: "مراقبة مباشرة لحالة جميع خدماتنا الإلكترونية. يتم التحقق كل 5 دقائق تلقائياً."
   navbar:
@@ -54,6 +53,80 @@ status-website:
       src: url('https://alshhbaa.com/assets/fonts/Thmanyah-Font-Family/thmanyahsans-Bold.woff2') format('woff2');
       font-weight: 700;
       font-display: swap;
+    }
+    :root {
+      --body-background-color: #002d24 !important;
+      --body-text-color: #f4ede3 !important;
+      --card-background-color: rgba(255,255,255,0.03) !important;
+      --nav-background-color: rgba(0,45,36,0.92) !important;
+      --nav-border-bottom-color: rgba(200,165,107,0.2) !important;
+      --nav-current-border-bottom-color: #c8a56b !important;
+      --card-border-color: rgba(200,165,107,0.15) !important;
+      --up-border-left-color: #2ecc71 !important;
+      --down-border-left-color: #f87171 !important;
+      --down-background-color: rgba(127,29,29,0.3) !important;
+      --degraded-border-left-color: #f4c66b !important;
+      --tag-color: #002d24 !important;
+      --tag-up-background-color: #2ecc71 !important;
+      --tag-down-background-color: #f87171 !important;
+      --tag-degraded-background-color: #f4c66b !important;
+      --change-background-color: #c8a56b !important;
+      --error-button-border-color: rgba(200,165,107,0.3) !important;
+      --error-button-background-color: rgba(200,165,107,0.12) !important;
+      --error-button-color: #c8a56b !important;
+      --submit-button-border-color: rgba(200,165,107,0.3) !important;
+      --submit-button-background-color: rgba(200,165,107,0.12) !important;
+      --submit-button-color: #c8a56b !important;
+      --graph-opacity: 0.85 !important;
+      --graph-filter: sepia(25%) hue-rotate(10deg) !important;
+    }
+    body {
+      font-family: 'Thmanyah Serif Text', serif !important;
+      direction: rtl;
+      text-align: right;
+      background: radial-gradient(ellipse at 60% 0%, rgba(200,165,107,0.08), transparent 50%), #002d24 !important;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    h1, h2, h3 {
+      font-family: 'Thmanyah Serif Display', serif !important;
+      letter-spacing: 0.02em;
+    }
+    nav, nav a, button, label, .tag, .badge, footer, input {
+      font-family: 'Thmanyah Sans', sans-serif !important;
+    }
+    nav {
+      backdrop-filter: blur(14px) saturate(1.4);
+      border-bottom: 1px solid rgba(200,165,107,0.15) !important;
+    }
+    nav .container { direction: rtl; flex-direction: row-reverse; }
+    nav ul { direction: rtl; }
+    .site-status, article, .card {
+      backdrop-filter: blur(10px);
+      border-radius: 12px !important;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+      transition: border-color 0.3s ease, transform 0.25s ease;
+    }
+    .site-status:hover, article:hover, .card:hover {
+      border-color: rgba(200,165,107,0.35) !important;
+      transform: translateY(-2px);
+    }
+    .site-status {
+      border-left: none !important;
+      border-right-width: 3px !important;
+      border-right-style: solid !important;
+    }
+    a { color: #c8a56b !important; text-decoration: none; transition: opacity 0.2s ease; }
+    a:hover { opacity: 0.8; }
+    .f { direction: rtl; text-align: right; }
+    .f.r, form.f.r { direction: rtl; }
+    .site-status .content { text-align: right; }
+    footer { opacity: 0.55; font-size: 0.875rem; direction: rtl; text-align: center; }
+    .lead { direction: rtl; text-align: right; }
+    ::selection { background: rgba(200,165,107,0.35); color: inherit; }
+    @media (max-width: 640px) {
+      nav .container { flex-direction: column; align-items: center; }
+      nav ul { justify-content: center; gap: 0.5rem; }
     }
     </style>
 
