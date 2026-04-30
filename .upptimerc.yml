@@ -12,6 +12,7 @@ sites:
     icon: https://alshhbaa.com/assets/favicons/favicon-96.png
   - name: محرك الرسائل (API)
     url: https://formsubmit.co
+    icon: https://img.icons8.com/ios-filled/100/ffffff/api.png
     expectedStatusCodes:
       - 200
       - 403
