@@ -13,8 +13,6 @@ jobs:
       contents: write
       issues: write
       actions: write
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,5 +21,4 @@ jobs:
           token: ${{ secrets.GH_PAT || github.token }}
       - name: Update code
         uses: upptime/updates@master
-        env:
           GH_PAT: ${{ secrets.GH_PAT || github.token }}
