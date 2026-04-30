@@ -98,7 +98,13 @@ status-website:
             const graphDiv = document.createElement('div');
             graphDiv.className = 'dashboard-graph';
             graphDiv.innerHTML = `<a href="${href}" aria-label="Response time graph"><img src="https://raw.githubusercontent.com/Alshhbaa/status/main/graphs/${slug}/response-time-week.png" alt="Response time graph" loading="lazy"></a>`;
+
+            const copyDiv = document.createElement('div');
+            copyDiv.className = 'dashboard-copy';
+            Array.from(card.childNodes).forEach(child => copyDiv.appendChild(child));
+
             card.appendChild(graphDiv);
+            card.appendChild(copyDiv);
           });
         }
       }
@@ -181,24 +187,36 @@ status-website:
     }
     .dashboard-card {
       display: grid !important;
-      grid-template-columns: minmax(280px, 1fr) minmax(260px, 0.72fr);
+      grid-template-columns: minmax(200px, 320px) minmax(260px, 1fr);
       align-items: center;
-      column-gap: clamp(1.5rem, 4vw, 3rem);
-      min-height: 260px;
+      column-gap: clamp(1.25rem, 3vw, 2.25rem);
+      min-height: 220px;
+      direction: ltr;
     }
-    .dashboard-card > :not(.dashboard-graph) {
+    .dashboard-card > :not(.dashboard-graph):not(.dashboard-copy),
+    .dashboard-card .dashboard-copy {
       grid-column: 2;
+      justify-self: end;
+      align-self: center;
+      direction: rtl;
+      text-align: right;
     }
     .dashboard-card .dashboard-graph {
       grid-column: 1;
       grid-row: 1 / -1;
       width: 100%;
+      max-width: 320px;
       align-self: center;
+      justify-self: start;
     }
     .dashboard-card .dashboard-graph img {
       margin-top: 0;
       padding-top: 0;
       border-top: 0;
+      width: 100% !important;
+      height: clamp(110px, 14vw, 150px) !important;
+      object-fit: contain;
+      object-position: left center;
     }
     .dashboard-graph a {
       display: block;
@@ -448,9 +466,14 @@ status-website:
       .dashboard-card {
         display: block !important;
         min-height: 0;
+        direction: rtl;
       }
       .dashboard-card .dashboard-graph {
         margin-top: 1rem;
+        max-width: 100%;
+      }
+      .dashboard-card .dashboard-copy {
+        text-align: right;
       }
     }
     </style>
