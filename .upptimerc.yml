@@ -4,13 +4,14 @@
 owner: Alshhbaa
 repo: status
 branch: main
+user-agent: Nhasiat-Alshhbaa-Status-Bot
 
 sites:
   - name: الموقع الرئيسي
     url: https://alshhbaa.com
     icon: https://alshhbaa.com/assets/favicons/favicon-96.png
   - name: محرك الرسائل (API)
-    url: https://formsubmit.co/ajax/alshhbaa.r@gmail.com
+    url: https://formsubmit.co
     method: GET
 
 status-website:
