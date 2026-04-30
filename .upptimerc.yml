@@ -36,8 +36,13 @@ status-website:
         document.querySelectorAll('a, h1, h2, h3, h4, p, span').forEach(el => {
           el.childNodes.forEach(node => {
             if (node.nodeType === Node.TEXT_NODE) {
-              if (node.nodeValue.includes('Website')) node.nodeValue = node.nodeValue.replace(/Website/g, 'الموقع الرئيسي');
-              if (node.nodeValue.includes('API')) node.nodeValue = node.nodeValue.replace(/API/g, 'محرك الرسائل (API)');
+              let text = node.nodeValue;
+              if (text.includes('Website') && !text.includes('الموقع')) {
+                node.nodeValue = text.replace(/Website/g, 'الموقع الرئيسي');
+              }
+              if (text.includes('API') && !text.includes('محرك')) {
+                node.nodeValue = text.replace(/API/g, 'محرك الرسائل (API)');
+              }
             }
           });
         });
