@@ -1,35 +1,151 @@
-# Upptime configuration for Nhasiat Al-Shhbaa status page
-# Docs: https://upptime.js.org/docs/configuration
+# Nhasiat Al-Shhbaa — Status Page Configuration
+# Only 2 endpoints: main site + form API (no redundant /contact or /en pages)
 
 owner: Alshhbaa
 repo: status
 branch: main
 
 sites:
-  - name: Al-Shhbaa Website
+  - name: الموقع الرئيسي
     url: https://alshhbaa.com
     icon: https://alshhbaa.com/assets/favicons/favicon-96.png
-  - name: Contact Page
-    url: https://alshhbaa.com/contact
-  - name: English Website
-    url: https://alshhbaa.com/en
-
-  # Uncomment when shop.alshhbaa.com launches:
-  # - name: Al-Shhbaa Shop
-  #   url: https://shop.alshhbaa.com
+  - name: محرك الرسائل (API)
+    url: https://formsubmit.co/ajax/alshhbaa.r@gmail.com
+    method: GET
 
 status-website:
   cname: status.alshhbaa.com
   name: نحاسيات الشهباء
-  logoUrl: https://alshhbaa.com/assets/favicons/favicon-96.png
+  logoUrl: https://alshhbaa.com/assets/logo-gold.svg
   favicon: https://alshhbaa.com/assets/favicons/favicon-48.png
   theme: dark
   introTitle: "**نحاسيات الشهباء** — حالة الخدمات"
   introMessage: "مراقبة مباشرة لحالة جميع خدماتنا الإلكترونية. يتم التحقق كل 5 دقائق تلقائياً."
   navbar:
-    - title: Status
-      href: /
-    - title: GitHub
-      href: https://github.com/$OWNER/$REPO
-    - title: alshhbaa.com
+    - title: الرئيسية
       href: https://alshhbaa.com
+    - title: تواصل معنا
+      href: https://alshhbaa.com/contact
+  customHeadHtml: >-
+    <style>
+    @font-face {
+      font-family: 'Thmanyah Serif Display';
+      src: url('https://alshhbaa.com/assets/fonts/Thmanyah-Font-Family/thmanyahserifdisplay-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Thmanyah Serif Text';
+      src: url('https://alshhbaa.com/assets/fonts/Thmanyah-Font-Family/thmanyahseriftext-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Thmanyah Sans';
+      src: url('https://alshhbaa.com/assets/fonts/Thmanyah-Font-Family/thmanyahsans-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Thmanyah Sans';
+      src: url('https://alshhbaa.com/assets/fonts/Thmanyah-Font-Family/thmanyahsans-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-display: swap;
+    }
+    :root {
+      --body-background-color: #002d24;
+      --body-text-color: #f4ede3;
+      --card-background-color: rgba(255,255,255,0.03);
+      --nav-background-color: #002d24;
+      --nav-border-bottom-color: rgba(200,165,107,0.2);
+      --nav-current-border-bottom-color: #c8a56b;
+      --card-border-color: rgba(200,165,107,0.15);
+      --down-border-left-color: #f87171;
+      --down-background-color: rgba(127,29,29,0.3);
+      --degraded-border-left-color: #f4c66b;
+      --up-border-left-color: #2ecc71;
+      --tag-color: #002d24;
+      --tag-up-background-color: #2ecc71;
+      --tag-down-background-color: #f87171;
+      --tag-degraded-background-color: #f4c66b;
+      --change-background-color: #c8a56b;
+      --error-button-border-color: rgba(200,165,107,0.3);
+      --error-button-background-color: rgba(200,165,107,0.1);
+      --error-button-color: #c8a56b;
+      --submit-button-border-color: rgba(200,165,107,0.3);
+      --submit-button-background-color: rgba(200,165,107,0.1);
+      --submit-button-color: #c8a56b;
+      --graph-opacity: 0.9;
+      --graph-filter: sepia(30%) hue-rotate(10deg);
+    }
+    body {
+      font-family: 'Thmanyah Serif Text', serif !important;
+      direction: rtl;
+      background:
+        radial-gradient(circle at 60% 0%, rgba(200,165,107,0.1), transparent 40%),
+        #002d24 !important;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3 {
+      font-family: 'Thmanyah Serif Display', serif !important;
+      letter-spacing: 0.02em;
+    }
+    nav, nav a, button, .tag, .badge, footer {
+      font-family: 'Thmanyah Sans', sans-serif !important;
+    }
+    nav {
+      backdrop-filter: blur(12px) saturate(1.3);
+      background: rgba(0,45,36,0.85) !important;
+    }
+    .card, article {
+      backdrop-filter: blur(10px);
+      border-radius: 12px !important;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    .card:hover, article:hover {
+      border-color: rgba(200,165,107,0.3) !important;
+      transform: translateY(-2px);
+    }
+    a { color: #c8a56b !important; text-decoration: none; }
+    a:hover { opacity: 0.8; }
+    ::selection { background: rgba(200,165,107,0.35); }
+    </style>
+
+# Arabic i18n — full label translation
+i18n:
+  activeIncidents: البلاغات النشطة
+  allSystemsOperational: جميع الأنظمة تعمل بكفاءة عالية
+  incidentReport: "تقرير البلاغ #$NUMBER ←"
+  activeIncidentSummary: "فُتح بتاريخ $DATE مع $POSTS تحديث"
+  incidentTitle: "تفاصيل البلاغ $NUMBER"
+  incidentDetails: تفاصيل البلاغ
+  incidentFixed: تم الحل
+  incidentOngoing: قيد المعالجة
+  incidentOpenedAt: فُتح بتاريخ
+  incidentClosedAt: أُغلق بتاريخ
+  incidentViewOnGitHub: عرض التفاصيل على GitHub
+  incidentCommentSummary: "نُشر بتاريخ $DATE بواسطة $AUTHOR"
+  incidentBack: "→ العودة لجميع البلاغات"
+  pastIncidents: البلاغات السابقة
+  pastIncidentsResolved: "تم الحل خلال $MINUTES دقيقة مع $POSTS تحديث"
+  liveStatus: الحالة المباشرة
+  overallUptime: "نسبة التشغيل الإجمالية: $UPTIME"
+  overallUptimeTitle: نسبة التشغيل الإجمالية
+  averageResponseTime: "متوسط سرعة الاستجابة: $TIMEms"
+  averageResponseTimeTitle: متوسط الاستجابة
+  sevelDayResponseTime: سرعة الاستجابة خلال 7 أيام
+  responseTimeMs: "سرعة الاستجابة (مللي ثانية)"
+  up: يعمل
+  down: متوقف
+  degraded: أداء منخفض
+  ms: مللي ثانية
+  loading: جاري التحميل
+  navGitHub: GitHub
+  footer: "هذه الصفحة [مفتوحة المصدر]($REPO)، مدعومة بواسطة [Upptime](https://upptime.js.org)"
+  duration24H: 24 ساعة
+  duration7D: 7 أيام
+  duration30D: 30 يوم
+  duration1Y: سنة
+  durationAll: الكل
+  locale: ar-SA
