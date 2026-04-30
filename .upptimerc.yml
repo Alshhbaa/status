@@ -31,12 +31,6 @@ status-website:
   logoUrl: https://alshhbaa.com/assets/logo-gold.svg
   hideNavTitle: true
   favicon: https://alshhbaa.com/assets/favicons/favicon-48.png
-  introMessage: "مراقبة مباشرة لحالة جميع خدماتنا الإلكترونية. يتم التحقق كل 5 دقائق تلقائياً."
-  navbar:
-    - title: الرئيسية
-      href: https://alshhbaa.com
-    - title: تواصل معنا
-      href: https://alshhbaa.com/contact
   customHeadHtml: >-
     <style>
     @font-face {
