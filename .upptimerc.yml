@@ -20,8 +20,9 @@ status-website:
   cname: status.alshhbaa.com
   name: نحاسيات الشهباء
   logoUrl: https://alshhbaa.com/assets/logo-gold.svg
+  hideNavTitle: true
   favicon: https://alshhbaa.com/assets/favicons/favicon-48.png
-  introTitle: "**نحاسيات الشهباء** — حالة الخدمات"
+  introTitle: "حالة الخدمـات"
   introMessage: "مراقبة مباشرة لحالة جميع خدماتنا الإلكترونية. يتم التحقق كل 5 دقائق تلقائياً."
   navbar:
     - title: الرئيسية
@@ -55,18 +56,18 @@ status-website:
       font-display: swap;
     }
     :root {
-      --body-background-color: #002d24 !important;
+      --body-background-color: #001b3a !important;
       --body-text-color: #f4ede3 !important;
-      --card-background-color: rgba(255,255,255,0.03) !important;
-      --nav-background-color: rgba(0,45,36,0.92) !important;
+      --card-background-color: rgba(255,255,255,0.06) !important;
+      --nav-background-color: rgba(0,27,58,0.92) !important;
       --nav-border-bottom-color: rgba(200,165,107,0.2) !important;
       --nav-current-border-bottom-color: #c8a56b !important;
-      --card-border-color: rgba(200,165,107,0.15) !important;
+      --card-border-color: rgba(255,255,255,0.12) !important;
       --up-border-left-color: #2ecc71 !important;
       --down-border-left-color: #f87171 !important;
       --down-background-color: rgba(127,29,29,0.3) !important;
       --degraded-border-left-color: #f4c66b !important;
-      --tag-color: #002d24 !important;
+      --tag-color: #001b3a !important;
       --tag-up-background-color: #2ecc71 !important;
       --tag-down-background-color: #f87171 !important;
       --tag-degraded-background-color: #f4c66b !important;
@@ -77,18 +78,28 @@ status-website:
       --submit-button-border-color: rgba(200,165,107,0.3) !important;
       --submit-button-background-color: rgba(200,165,107,0.12) !important;
       --submit-button-color: #c8a56b !important;
-      --graph-opacity: 0.85 !important;
-      --graph-filter: sepia(25%) hue-rotate(10deg) !important;
+      --graph-opacity: 0.7 !important;
+      --graph-filter: sepia(20%) hue-rotate(180deg) brightness(1.2) !important;
     }
     body {
       font-family: 'Thmanyah Serif Text', serif !important;
       direction: rtl;
       text-align: right;
-      background: radial-gradient(ellipse at 60% 0%, rgba(200,165,107,0.08), transparent 50%), #002d24 !important;
+      background:
+        url('https://alshhbaa.com/assets/images/leather-pattern-luxury.webp'),
+        radial-gradient(circle at 50% 50%, rgba(0,100,255,0.04), transparent 80%),
+        #001b3a !important;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-    h1, h2, h3 {
+    h1 {
+      font-family: 'Thmanyah Serif Display', serif !important;
+      font-feature-settings: 'salt' 1, 'ss01' 1, 'ss02' 1;
+      letter-spacing: 0.02em;
+      font-size: clamp(2rem, 4vw, 3rem) !important;
+      color: #c8a56b !important;
+    }
+    h2, h3 {
       font-family: 'Thmanyah Serif Display', serif !important;
       letter-spacing: 0.02em;
     }
@@ -101,39 +112,90 @@ status-website:
     }
     nav .container { direction: rtl; flex-direction: row-reverse; }
     nav ul { direction: rtl; }
-    .site-status, article, .card {
-      backdrop-filter: blur(10px);
-      border-radius: 12px !important;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
-      transition: border-color 0.3s ease, transform 0.25s ease;
+    .logo img { height: 3.5rem !important; }
+    article.graph {
+      background: rgba(255,255,255,0.06) !important;
+      backdrop-filter: blur(20px) saturate(1.4) !important;
+      border: 1px solid rgba(255,255,255,0.15) !important;
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,0.08),
+        0 4px 24px rgba(0,0,0,0.25) !important;
+      border-radius: 14px !important;
+      transition: border-color 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
+      background-position: center left !important;
+      padding: 1.25rem 1.5rem !important;
     }
-    .site-status:hover, article:hover, .card:hover {
+    article.graph:hover {
       border-color: rgba(200,165,107,0.35) !important;
       transform: translateY(-2px);
+      box-shadow:
+        inset 0 1px 2px rgba(255,255,255,0.12),
+        0 12px 30px rgba(0,0,0,0.3) !important;
     }
-    .site-status {
+    .site-status, .card {
+      backdrop-filter: blur(20px) saturate(1.4) !important;
+      border-radius: 14px !important;
+      background: rgba(255,255,255,0.06) !important;
+      border: 1px solid rgba(255,255,255,0.15) !important;
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,0.08),
+        0 4px 24px rgba(0,0,0,0.25) !important;
+    }
+    article.graph {
       border-left: none !important;
       border-right-width: 3px !important;
       border-right-style: solid !important;
     }
+    article.up { border-right-color: #2ecc71 !important; }
+    article.down { border-right-color: #f87171 !important; }
+    article.degraded { border-right-color: #f4c66b !important; }
     a { color: #c8a56b !important; text-decoration: none; transition: opacity 0.2s ease; }
-    a:hover { opacity: 0.8; }
+    a:hover { opacity: 0.85; }
     .f { direction: rtl; text-align: right; }
     .f.r, form.f.r { direction: rtl; }
+    .r label {
+      margin-left: 0 !important;
+      margin-right: 1rem !important;
+      padding: 0.45rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.88rem;
+    }
+    .r label:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(200,165,107,0.3);
+    }
+    .r input:checked + label {
+      background: rgba(200,165,107,0.15) !important;
+      border-color: rgba(200,165,107,0.4) !important;
+      color: #c8a56b !important;
+    }
     .site-status .content { text-align: right; }
-    footer { opacity: 0.55; font-size: 0.875rem; direction: rtl; text-align: center; }
-    .lead { direction: rtl; text-align: right; }
+    footer { opacity: 0.45; font-size: 0.85rem; direction: rtl; text-align: center; }
+    .lead { direction: rtl; text-align: right; font-size: 1.05rem !important; color: rgba(244,237,227,0.7) !important; }
     ::selection { background: rgba(200,165,107,0.35); color: inherit; }
+    .data {
+      background: rgba(200,165,107,0.12) !important;
+      color: #c8a56b !important;
+      padding: 0.2rem 0.5rem !important;
+      border-radius: 6px !important;
+    }
+    header { margin-bottom: 2.5rem !important; }
+    section.live-status { margin-top: 1.5rem; }
+    .icon { margin-right: 0 !important; margin-left: 0.33rem !important; }
     @media (max-width: 640px) {
       nav .container { flex-direction: column; align-items: center; }
       nav ul { justify-content: center; gap: 0.5rem; }
+      .r label { padding: 0.35rem 0.7rem; font-size: 0.8rem; margin-right: 0.5rem !important; }
     }
     </style>
 
 # Arabic i18n — full label translation
 i18n:
   activeIncidents: البلاغات النشطة
-  allSystemsOperational: جميع الأنظمة تعمل بكفاءة عالية
+  allSystemsOperational: جميع الأنظمة تعمل بكفاءة عالية ✅
   incidentReport: "تقرير البلاغ #$NUMBER ←"
   activeIncidentSummary: "فُتح بتاريخ $DATE مع $POSTS تحديث"
   incidentTitle: "تفاصيل البلاغ $NUMBER"
