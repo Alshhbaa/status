@@ -1,5 +1,12 @@
 # <img src="https://alshhbaa.com/assets/logo-gold.svg" height="32" valign="middle"> [نحاسيات الشهباء — حالة الخدمات](https://status.alshhbaa.com)
 
+[![Uptime CI](https://github.com/Alshhbaa/status/workflows/Uptime%20CI/badge.svg)](https://github.com/Alshhbaa/status/actions?query=workflow%3A%22Uptime+CI%22)
+[![Response Time CI](https://github.com/Alshhbaa/status/workflows/Response%20Time%20CI/badge.svg)](https://github.com/Alshhbaa/status/actions?query=workflow%3A%22Response+Time+CI%22)
+[![Graphs CI](https://github.com/Alshhbaa/status/workflows/Graphs%20CI/badge.svg)](https://github.com/Alshhbaa/status/actions?query=workflow%3A%22Graphs+CI%22)
+[![Static Site CI](https://github.com/Alshhbaa/status/workflows/Static%20Site%20CI/badge.svg)](https://github.com/Alshhbaa/status/actions?query=workflow%3A%22Static+Site+CI%22)
+[![Summary CI](https://github.com/Alshhbaa/status/workflows/Summary%20CI/badge.svg)](https://github.com/Alshhbaa/status/actions?query=workflow%3A%22Summary+CI%22)
+
+
 > Powered by [Upptime](https://github.com/upptime/upptime) — 100% free, open-source uptime monitoring
 
 This repository contains the status page for [Nhasiat Al-Shhbaa](https://alshhbaa.com), automatically monitoring our services every 5 minutes using GitHub Actions.
