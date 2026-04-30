@@ -96,7 +96,7 @@ status-website:
 
             const graphDiv = document.createElement('div');
             graphDiv.className = 'dashboard-graph';
-            graphDiv.innerHTML = `<a href="${href}" aria-label="Response time graph"><img src="/graphs/${slug}/response-time-week.png" alt="Response time graph" loading="lazy"></a>`;
+            graphDiv.innerHTML = `<a href="${href}" aria-label="Response time graph"><img src="https://raw.githubusercontent.com/Alshhbaa/status/main/graphs/${slug}/response-time-week.png" alt="Response time graph" loading="lazy"></a>`;
             card.appendChild(graphDiv);
           });
         }
@@ -397,6 +397,9 @@ status-website:
       color: #c8a56b !important;
       padding: 0.2rem 0.5rem !important;
       border-radius: 6px !important;
+      direction: ltr;
+      unicode-bidi: isolate;
+      display: inline-block;
     }
     header { margin-bottom: 2.5rem !important; }
     section.live-status { margin-top: 1.5rem; }
