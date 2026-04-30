@@ -1,116 +1,130 @@
 :root {
-  /* === Base surfaces === */
-  --body-background-color: #002d24;
-  --body-text-color: #f4ede3;
-  --card-background-color: rgba(255, 255, 255, 0.03);
-  --nav-background-color: rgba(0, 45, 36, 0.92);
-  --nav-border-bottom-color: rgba(200, 165, 107, 0.2);
-  --nav-current-border-bottom-color: #c8a56b;
-  --card-border-color: rgba(200, 165, 107, 0.15);
+	/* === Base surfaces === */
+	--body-background-color: #002d24;
+	--body-text-color: #f4ede3;
+	--card-background-color: rgba(255, 255, 255, 0.03);
+	--nav-background-color: rgba(0, 45, 36, 0.92);
+	--nav-border-bottom-color: rgba(200, 165, 107, 0.2);
+	--nav-current-border-bottom-color: #c8a56b;
+	--card-border-color: rgba(200, 165, 107, 0.15);
 
-  /* === Status indicators === */
-  --up-border-left-color: #2ecc71;
-  --down-border-left-color: #f87171;
-  --down-background-color: rgba(127, 29, 29, 0.3);
-  --degraded-border-left-color: #f4c66b;
+	/* === Status indicators === */
+	--up-border-left-color: #2ecc71;
+	--down-border-left-color: #f87171;
+	--down-background-color: rgba(127, 29, 29, 0.3);
+	--degraded-border-left-color: #f4c66b;
 
-  /* === Tags / badges === */
-  --tag-color: #002d24;
-  --tag-up-background-color: #2ecc71;
-  --tag-down-background-color: #f87171;
-  --tag-degraded-background-color: #f4c66b;
+	/* === Tags / badges === */
+	--tag-color: #002d24;
+	--tag-up-background-color: #2ecc71;
+	--tag-down-background-color: #f87171;
+	--tag-degraded-background-color: #f4c66b;
 
-  /* === Accent / action === */
-  --change-background-color: #c8a56b;
-  --error-button-border-color: rgba(200, 165, 107, 0.3);
-  --error-button-background-color: rgba(200, 165, 107, 0.12);
-  --error-button-color: #c8a56b;
-  --submit-button-border-color: rgba(200, 165, 107, 0.3);
-  --submit-button-background-color: rgba(200, 165, 107, 0.12);
-  --submit-button-color: #c8a56b;
+	/* === Accent / action === */
+	--change-background-color: #c8a56b;
+	--error-button-border-color: rgba(200, 165, 107, 0.3);
+	--error-button-background-color: rgba(200, 165, 107, 0.12);
+	--error-button-color: #c8a56b;
+	--submit-button-border-color: rgba(200, 165, 107, 0.3);
+	--submit-button-background-color: rgba(200, 165, 107, 0.12);
+	--submit-button-color: #c8a56b;
 
-  /* === Graphs === */
-  --graph-opacity: 0.85;
-  --graph-filter: sepia(25%) hue-rotate(10deg);
+	/* === Graphs === */
+	--graph-opacity: 0.85;
+	--graph-filter: sepia(25%) hue-rotate(10deg);
 }
 
 /* ==========================================
    Body — leather background + radial glow
    ========================================== */
 body {
-  font-family: "Thmanyah Serif Text", serif !important;
-  direction: rtl;
-  text-align: right;
-  background:
-    radial-gradient(ellipse at 60% 0%, rgba(200, 165, 107, 0.08), transparent 50%),
-    #002d24 !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-family: "Thmanyah Serif Text", serif !important;
+	direction: rtl;
+	text-align: right;
+	background:
+		radial-gradient(ellipse at 60% 0%, rgba(200, 165, 107, 0.08), transparent 50%), #002d24 !important;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 /* ==========================================
    Typography
    ========================================== */
-h1, h2, h3 {
-  font-family: "Thmanyah Serif Display", serif !important;
-  letter-spacing: 0.02em;
+h1,
+h2,
+h3 {
+	font-family: "Thmanyah Serif Display", serif !important;
+	letter-spacing: 0.02em;
 }
 
-nav, nav a, button, label, .tag, .badge, footer, input {
-  font-family: "Thmanyah Sans", sans-serif !important;
+nav,
+nav a,
+button,
+label,
+.tag,
+.badge,
+footer,
+input {
+	font-family: "Thmanyah Sans", sans-serif !important;
 }
 
 /* ==========================================
    Navbar
    ========================================== */
 nav {
-  backdrop-filter: blur(14px) saturate(1.4);
-  border-bottom: 1px solid rgba(200, 165, 107, 0.15) !important;
+	backdrop-filter: blur(14px) saturate(1.4);
+	border-bottom: 1px solid rgba(200, 165, 107, 0.15) !important;
 }
 
 /* RTL: flip nav layout */
 nav .container {
-  direction: rtl;
-  flex-direction: row-reverse;
+	direction: rtl;
+	flex-direction: row-reverse;
 }
 
 nav ul {
-  direction: rtl;
+	direction: rtl;
 }
 
 /* ==========================================
    Cards — glassmorphism
    ========================================== */
-.site-status, article, .card {
-  backdrop-filter: blur(10px);
-  border-radius: 12px !important;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
-  transition: border-color 0.3s ease, transform 0.25s ease;
+.site-status,
+article,
+.card {
+	backdrop-filter: blur(10px);
+	border-radius: 12px !important;
+	box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+	transition:
+		border-color 0.3s ease,
+		transform 0.25s ease;
 }
 
-.site-status:hover, article:hover, .card:hover {
-  border-color: rgba(200, 165, 107, 0.35) !important;
-  transform: translateY(-2px);
+.site-status:hover,
+article:hover,
+.card:hover {
+	border-color: rgba(200, 165, 107, 0.35) !important;
+	transform: translateY(-2px);
 }
 
 /* RTL: flip the left status border to the right side */
 .site-status {
-  border-left: none !important;
-  border-right-width: 3px !important;
-  border-right-style: solid !important;
+	border-left: none !important;
+	border-right-width: 3px !important;
+	border-right-style: solid !important;
 }
 
 /* ==========================================
    Links
    ========================================== */
 a {
-  color: #c8a56b !important;
-  text-decoration: none;
-  transition: opacity 0.2s ease;
+	color: #c8a56b !important;
+	text-decoration: none;
+	transition: opacity 0.2s ease;
 }
 
 a:hover {
-  opacity: 0.8;
+	opacity: 0.8;
 }
 
 /* ==========================================
@@ -118,52 +132,53 @@ a:hover {
    ========================================== */
 /* Flip the "Live Status" header row */
 .f {
-  direction: rtl;
-  text-align: right;
+	direction: rtl;
+	text-align: right;
 }
 
 /* Radio filter bar */
-.f.r, form.f.r {
-  direction: rtl;
+.f.r,
+form.f.r {
+	direction: rtl;
 }
 
 /* Site status text alignment */
 .site-status .content {
-  text-align: right;
+	text-align: right;
 }
 
 /* Footer */
 footer {
-  opacity: 0.55;
-  font-size: 0.875rem;
-  direction: rtl;
-  text-align: center;
+	opacity: 0.55;
+	font-size: 0.875rem;
+	direction: rtl;
+	text-align: center;
 }
 
 /* Lead paragraph */
 .lead {
-  direction: rtl;
-  text-align: right;
+	direction: rtl;
+	text-align: right;
 }
 
 /* ==========================================
    Selection highlight
    ========================================== */
 ::selection {
-  background: rgba(200, 165, 107, 0.35);
-  color: inherit;
+	background: rgba(200, 165, 107, 0.35);
+	color: inherit;
 }
 
 /* ==========================================
    Responsive: mobile adjustments
    ========================================== */
 @media (max-width: 640px) {
-  nav .container {
-    flex-direction: column;
-    align-items: center;
-  }
-  nav ul {
-    justify-content: center;
-    gap: 0.5rem;
-  }
+	nav .container {
+		flex-direction: column;
+		align-items: center;
+	}
+	nav ul {
+		justify-content: center;
+		gap: 0.5rem;
+	}
 }
