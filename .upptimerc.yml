@@ -31,16 +31,38 @@ status-website:
   favicon: https://alshhbaa.com/assets/favicons/favicon-48.png
   customHeadHtml: >-
     <script>
-      // 1. Force English locale for all date/time formatting (fixes tooltips)
       const OriginalDateTimeFormat = Intl.DateTimeFormat;
       Intl.DateTimeFormat = function(locale, options) {
         return new OriginalDateTimeFormat('en-US', options);
       };
+      Intl.DateTimeFormat.prototype = OriginalDateTimeFormat.prototype;
+
+      const OriginalNumberFormat = Intl.NumberFormat;
+      Intl.NumberFormat = function(locale, options) {
+        return new OriginalNumberFormat('en-US', options);
+      };
+      Intl.NumberFormat.prototype = OriginalNumberFormat.prototype;
+
+      const arabicDigits = /[\u0660-\u0669\u06f0-\u06f9]/g;
+      const hasArabicDigits = /[\u0660-\u0669\u06f0-\u06f9]/;
+      const digitMap = {
+        "\u0660": "0", "\u0661": "1", "\u0662": "2", "\u0663": "3", "\u0664": "4",
+        "\u0665": "5", "\u0666": "6", "\u0667": "7", "\u0668": "8", "\u0669": "9",
+        "\u06f0": "0", "\u06f1": "1", "\u06f2": "2", "\u06f3": "3", "\u06f4": "4",
+        "\u06f5": "5", "\u06f6": "6", "\u06f7": "7", "\u06f8": "8", "\u06f9": "9"
+      };
+      const normalizeNumbers = value => value.replace(arabicDigits, digit => digitMap[digit] || digit);
+
+      function normalizeTextNode(node) {
+        if (node.nodeType === Node.TEXT_NODE && hasArabicDigits.test(node.nodeValue)) {
+          node.nodeValue = normalizeNumbers(node.nodeValue);
+        }
+      }
 
       function translateAndInject() {
-        // 2. Translation logic
-        document.querySelectorAll('a, h1, h2, h3, h4, p, span, strong').forEach(el => {
+        document.querySelectorAll('a, h1, h2, h3, h4, p, span, strong, label, text, title').forEach(el => {
           el.childNodes.forEach(node => {
+            normalizeTextNode(node);
             if (node.nodeType === Node.TEXT_NODE) {
               let text = node.nodeValue;
               if (text.includes('Website') && !text.includes('الموقع')) {
@@ -53,35 +75,38 @@ status-website:
           });
         });
 
-        // 3. Robust Dashboard Graph Injection
-        const isMainPage = window.location.pathname === '/' || window.location.pathname.endsWith('/') || !window.location.pathname.includes('/history/');
+        document.querySelectorAll('[aria-label], [title], [alt]').forEach(el => {
+          ['aria-label', 'title', 'alt'].forEach(attr => {
+            const value = el.getAttribute(attr);
+            if (value && hasArabicDigits.test(value)) {
+              el.setAttribute(attr, normalizeNumbers(value));
+            }
+          });
+        });
+
+        const isMainPage = window.location.pathname === '/' || window.location.pathname === '/status/' || !window.location.pathname.includes('/history/');
         if (isMainPage) {
-          // Find all history links on the main page
           document.querySelectorAll('a[href*="/history/"]').forEach(link => {
-            // Traverse up to find the card container
-            let card = link.parentElement;
-            while (card && card.tagName !== 'SECTION' && card.offsetWidth < 200) {
-              card = card.parentElement;
-            }
-            
-            if (card && !card.querySelector('.dashboard-graph')) {
-              const parts = link.getAttribute('href').split('/');
-              const slug = parts[parts.length - 1] || parts[parts.length - 2];
-              
-              if (slug && slug !== 'history') {
-                const graphDiv = document.createElement('div');
-                graphDiv.className = 'dashboard-graph';
-                graphDiv.style.marginTop = '15px';
-                graphDiv.style.borderTop = '1px solid rgba(255,255,255,0.05)';
-                graphDiv.style.paddingTop = '10px';
-                graphDiv.style.width = '100%';
-                graphDiv.innerHTML = `<img src="graphs/${slug}/response-time.png" loading="lazy" style="width: 100%; height: auto; border-radius: 6px; opacity: 0.8; filter: contrast(1.1) brightness(0.9);">`;
-                card.appendChild(graphDiv);
-              }
-            }
+            const href = link.getAttribute('href') || '';
+            const slug = href.split('/').filter(Boolean).pop();
+            if (!slug || slug === 'history') return;
+
+            const card = link.closest('article, section, .site-status, .card, li') || link.parentElement;
+            if (!card || card.querySelector('.dashboard-graph')) return;
+
+            const graphDiv = document.createElement('div');
+            graphDiv.className = 'dashboard-graph';
+            graphDiv.innerHTML = `<a href="${href}" aria-label="Response time graph"><img src="/graphs/${slug}/response-time-week.png" alt="Response time graph" loading="lazy"></a>`;
+            card.appendChild(graphDiv);
           });
         }
       }
+
+      const observer = new MutationObserver(() => translateAndInject());
+      document.addEventListener('DOMContentLoaded', () => {
+        translateAndInject();
+        observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+      });
       setInterval(translateAndInject, 1000);
     </script>
     <style>
@@ -136,6 +161,15 @@ status-website:
       --graph-filter: none !important;
     }
     .dashboard-graph img {
+      width: 100% !important;
+      height: auto !important;
+      display: block;
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-radius: 8px;
+      opacity: 0.82;
+      filter: contrast(1.1) brightness(0.92);
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
     }
@@ -422,4 +456,4 @@ i18n:
   duration30D: 30 يوم
   duration1Y: سنة
   durationAll: الكل
-  locale: ar-SA
+  locale: en-US
