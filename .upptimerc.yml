@@ -10,8 +10,10 @@ sites:
   - name: الموقع الرئيسي
     url: https://alshhbaa.com
     icon: https://alshhbaa.com/assets/favicons/favicon-96.png
+    slug: website
   - name: محرك الرسائل (API)
     url: https://formsubmit.co
+    slug: api
     expectedStatusCodes:
       - 200
       - 403
