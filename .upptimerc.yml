@@ -7,10 +7,10 @@ branch: main
 user-agent: Nhasiat-Alshhbaa-Status-Bot
 
 sites:
-  - name: الموقع الرئيسي
+  - name: Website
     url: https://alshhbaa.com
     icon: https://alshhbaa.com/assets/favicons/favicon-96.png
-  - name: محرك الرسائل (API)
+  - name: API
     url: https://formsubmit.co
     expectedStatusCodes:
       - 200
@@ -30,6 +30,19 @@ status-website:
   hideNavTitle: true
   favicon: https://alshhbaa.com/assets/favicons/favicon-48.png
   customHeadHtml: >-
+    <script>
+      // Automatically translate English config names to Arabic for the UI
+      setInterval(() => {
+        document.querySelectorAll('a, h1, h2, h3, h4, p, span').forEach(el => {
+          el.childNodes.forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE) {
+              if (node.nodeValue.includes('Website')) node.nodeValue = node.nodeValue.replace(/Website/g, 'الموقع الرئيسي');
+              if (node.nodeValue.includes('API')) node.nodeValue = node.nodeValue.replace(/API/g, 'محرك الرسائل (API)');
+            }
+          });
+        });
+      }, 50);
+    </script>
     <style>
     @font-face {
       font-family: 'Thmanyah Serif Display';
