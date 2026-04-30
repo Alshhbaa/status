@@ -12,7 +12,6 @@ sites:
     icon: https://alshhbaa.com/assets/favicons/favicon-96.png
   - name: محرك الرسائل (API)
     url: https://formsubmit.co
-    icon: https://img.icons8.com/ios-filled/100/ffffff/api.png
     expectedStatusCodes:
       - 200
       - 403
@@ -57,10 +56,10 @@ status-website:
       font-display: swap;
     }
     :root {
-      --body-background-color: #001b3a !important;
+      --body-background-color: #000 !important;
       --body-text-color: #f4ede3 !important;
       --card-background-color: rgba(255,255,255,0.06) !important;
-      --nav-background-color: rgba(0,27,58,0.92) !important;
+      --nav-background-color: rgba(0,0,0,0.6) !important;
       --nav-border-bottom-color: rgba(200,165,107,0.2) !important;
       --nav-current-border-bottom-color: #c8a56b !important;
       --card-border-color: rgba(255,255,255,0.12) !important;
@@ -88,8 +87,8 @@ status-website:
       text-align: right;
       background:
         url('https://alshhbaa.com/assets/images/leather-pattern-luxury.webp'),
-        radial-gradient(circle at 50% 50%, rgba(0,100,255,0.04), transparent 80%),
-        #001b3a !important;
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03), transparent 80%),
+        #000 !important;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -98,7 +97,7 @@ status-website:
       font-feature-settings: 'salt' 1, 'ss01' 1, 'ss02' 1;
       letter-spacing: 0.02em;
       font-size: clamp(2rem, 4vw, 3rem) !important;
-      color: #c8a56b !important;
+      color: #fff !important;
     }
     h2, h3 {
       font-family: 'Thmanyah Serif Display', serif !important;
@@ -108,8 +107,8 @@ status-website:
       font-family: 'Thmanyah Sans', sans-serif !important;
     }
     nav {
-      backdrop-filter: blur(14px) saturate(1.4);
-      border-bottom: 1px solid rgba(200,165,107,0.15) !important;
+      backdrop-filter: blur(16px) saturate(1.2) !important;
+      border-bottom: 1px solid rgba(200,165,107,0.2) !important;
     }
     nav .container { direction: rtl; flex-direction: row-reverse; }
     nav ul { direction: rtl; }
