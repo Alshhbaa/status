@@ -94,6 +94,7 @@ status-website:
             const card = link.closest('article, section, .site-status, .card, li') || link.parentElement;
             if (!card || card.querySelector('.dashboard-graph')) return;
 
+            card.classList.add('dashboard-card');
             const graphDiv = document.createElement('div');
             graphDiv.className = 'dashboard-graph';
             graphDiv.innerHTML = `<a href="${href}" aria-label="Response time graph"><img src="https://raw.githubusercontent.com/Alshhbaa/status/main/graphs/${slug}/response-time-week.png" alt="Response time graph" loading="lazy"></a>`;
@@ -177,6 +178,30 @@ status-website:
       opacity: 1 !important;
       transform: scale(1.02);
       filter: contrast(1.2) brightness(1.1) !important;
+    }
+    .dashboard-card {
+      display: grid !important;
+      grid-template-columns: minmax(280px, 1fr) minmax(260px, 0.72fr);
+      align-items: center;
+      column-gap: clamp(1.5rem, 4vw, 3rem);
+      min-height: 260px;
+    }
+    .dashboard-card > :not(.dashboard-graph) {
+      grid-column: 2;
+    }
+    .dashboard-card .dashboard-graph {
+      grid-column: 1;
+      grid-row: 1 / -1;
+      width: 100%;
+      align-self: center;
+    }
+    .dashboard-card .dashboard-graph img {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+    .dashboard-graph a {
+      display: block;
     }
     /* Scope graph image styling to avoid blowing up favicons */
     .graph img, .dashboard-graph img {
@@ -420,6 +445,13 @@ status-website:
       .r label { padding: 0.35rem 0.7rem; font-size: 0.8rem; margin-right: 0.5rem !important; }
       article.graph { padding: 1.25rem !important; border-radius: 1.25rem !important; }
       .site-status, .card { border-radius: 1.25rem !important; }
+      .dashboard-card {
+        display: block !important;
+        min-height: 0;
+      }
+      .dashboard-card .dashboard-graph {
+        margin-top: 1rem;
+      }
     }
     </style>
 
