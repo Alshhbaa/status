@@ -1,6 +1,6 @@
 [
   {
-    "name": "الموقع الرئيسي",
+    "name": "Website",
     "url": "https://alshhbaa.com",
     "icon": "https://alshhbaa.com/assets/favicons/favicon-96.png",
     "slug": "website",
@@ -10,15 +10,15 @@
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
-    "time": 72,
-    "timeDay": 72,
-    "timeWeek": 72,
-    "timeMonth": 72,
-    "timeYear": 72,
+    "time": 85,
+    "timeDay": 85,
+    "timeWeek": 85,
+    "timeMonth": 85,
+    "timeYear": 85,
     "dailyMinutesDown": {}
   },
   {
-    "name": "محرك الرسائل (API)",
+    "name": "API",
     "url": "https://formsubmit.co",
     "icon": "https://icons.duckduckgo.com/ip3/formsubmit.co.ico",
     "slug": "api",
@@ -28,11 +28,11 @@
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
-    "time": 89,
-    "timeDay": 89,
-    "timeWeek": 89,
-    "timeMonth": 89,
-    "timeYear": 89,
+    "time": 80,
+    "timeDay": 80,
+    "timeWeek": 80,
+    "timeMonth": 80,
+    "timeYear": 80,
     "dailyMinutesDown": {}
   }
 ]
