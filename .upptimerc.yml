@@ -31,9 +31,9 @@ status-website:
   favicon: https://alshhbaa.com/assets/favicons/favicon-48.png
   customHeadHtml: >-
     <script>
-      // Automatically translate English config names to Arabic for the UI
-      setInterval(() => {
-        document.querySelectorAll('a, h1, h2, h3, h4, p, span').forEach(el => {
+      function translateAndInject() {
+        // 1. Translation logic
+        document.querySelectorAll('a, h1, h2, h3, h4, p, span, strong').forEach(el => {
           el.childNodes.forEach(node => {
             if (node.nodeType === Node.TEXT_NODE) {
               let text = node.nodeValue;
@@ -46,7 +46,31 @@ status-website:
             }
           });
         });
-      }, 50);
+
+        // 2. Dashboard Graph Injection
+        // Only target the main listing page
+        const isMainPage = window.location.pathname === '/' || window.location.pathname.endsWith('/') || !window.location.pathname.includes('/history/');
+        if (isMainPage) {
+          document.querySelectorAll('section > div > div').forEach(card => {
+            const link = card.querySelector('a[href*="/history/"]');
+            if (link && !card.querySelector('.dashboard-graph')) {
+              const parts = link.getAttribute('href').split('/');
+              const slug = parts[parts.length - 1] || parts[parts.length - 2];
+              if (slug && slug !== 'history') {
+                const graphDiv = document.createElement('div');
+                graphDiv.className = 'dashboard-graph';
+                graphDiv.style.marginTop = '15px';
+                graphDiv.style.borderTop = '1px solid rgba(255,255,255,0.05)';
+                graphDiv.style.paddingTop = '10px';
+                graphDiv.innerHTML = `<img src="graphs/${slug}/response-time.png" loading="lazy" style="width: 100%; height: auto; border-radius: 6px; opacity: 0.8; filter: contrast(1.1) brightness(0.9);">`;
+                card.appendChild(graphDiv);
+              }
+            }
+          });
+        }
+      }
+      // Run frequently to catch Sapper route changes
+      setInterval(translateAndInject, 1000);
     </script>
     <style>
     @font-face {
@@ -98,6 +122,26 @@ status-website:
       --submit-button-color: #c8a56b !important;
       --graph-opacity: 0.85 !important;
       --graph-filter: none !important;
+    }
+    .dashboard-graph img {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    .dashboard-graph img:hover {
+      opacity: 1 !important;
+      transform: scale(1.02);
+      filter: contrast(1.2) brightness(1.1) !important;
+    }
+    /* Scope graph image styling to avoid blowing up favicons */
+    .graph img, .dashboard-graph img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    /* Ensure uptime bars are visible */
+    [data-uptime] {
+      opacity: 1 !important;
+      z-index: 10;
     }
     body {
       font-family: 'Thmanyah Serif Text', serif !important;

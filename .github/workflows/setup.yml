@@ -44,6 +44,9 @@ jobs:
         with:
           workflow: Graphs CI
           token: ${{ secrets.GH_PAT || github.token }}
+        env:
+          LC_ALL: en_US.UTF-8
+          LANG: en_US.UTF-8
       - name: Generate site
         uses: upptime/uptime-monitor@master
         with:
