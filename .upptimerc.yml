@@ -31,8 +31,14 @@ status-website:
   favicon: https://alshhbaa.com/assets/favicons/favicon-48.png
   customHeadHtml: >-
     <script>
+      // 1. Force English locale for all date/time formatting (fixes tooltips)
+      const OriginalDateTimeFormat = Intl.DateTimeFormat;
+      Intl.DateTimeFormat = function(locale, options) {
+        return new OriginalDateTimeFormat('en-US', options);
+      };
+
       function translateAndInject() {
-        // 1. Translation logic
+        // 2. Translation logic
         document.querySelectorAll('a, h1, h2, h3, h4, p, span, strong').forEach(el => {
           el.childNodes.forEach(node => {
             if (node.nodeType === Node.TEXT_NODE) {
@@ -47,21 +53,28 @@ status-website:
           });
         });
 
-        // 2. Dashboard Graph Injection
-        // Only target the main listing page
+        // 3. Robust Dashboard Graph Injection
         const isMainPage = window.location.pathname === '/' || window.location.pathname.endsWith('/') || !window.location.pathname.includes('/history/');
         if (isMainPage) {
-          document.querySelectorAll('section > div > div').forEach(card => {
-            const link = card.querySelector('a[href*="/history/"]');
-            if (link && !card.querySelector('.dashboard-graph')) {
+          // Find all history links on the main page
+          document.querySelectorAll('a[href*="/history/"]').forEach(link => {
+            // Traverse up to find the card container
+            let card = link.parentElement;
+            while (card && card.tagName !== 'SECTION' && card.offsetWidth < 200) {
+              card = card.parentElement;
+            }
+            
+            if (card && !card.querySelector('.dashboard-graph')) {
               const parts = link.getAttribute('href').split('/');
               const slug = parts[parts.length - 1] || parts[parts.length - 2];
+              
               if (slug && slug !== 'history') {
                 const graphDiv = document.createElement('div');
                 graphDiv.className = 'dashboard-graph';
                 graphDiv.style.marginTop = '15px';
                 graphDiv.style.borderTop = '1px solid rgba(255,255,255,0.05)';
                 graphDiv.style.paddingTop = '10px';
+                graphDiv.style.width = '100%';
                 graphDiv.innerHTML = `<img src="graphs/${slug}/response-time.png" loading="lazy" style="width: 100%; height: auto; border-radius: 6px; opacity: 0.8; filter: contrast(1.1) brightness(0.9);">`;
                 card.appendChild(graphDiv);
               }
@@ -69,7 +82,6 @@ status-website:
           });
         }
       }
-      // Run frequently to catch Sapper route changes
       setInterval(translateAndInject, 1000);
     </script>
     <style>
