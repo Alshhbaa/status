@@ -19,6 +19,7 @@ sites:
     body: "name=Upptime%20Synthetic%20Check&email=monitor%40example.invalid&message=synthetic%20health%20check%20-%20ignored%20by%20honeypot&_subject=Synthetic%20monitor%20check&_captcha=false&_template=table&_honey=synthetic-monitor"
     expectedStatusCodes:
       - 200
+      - 403
 
 status-website:
   cname: status.alshhbaa.com
