@@ -1,5 +1,5 @@
 # Nhasiat Al-Shhbaa — Status Page Configuration
-# Only 2 endpoints: main site + form API (no redundant /contact or /en pages)
+# Only 2 endpoints: main site + form API
 
 owner: Alshhbaa
 repo: status
@@ -12,14 +12,16 @@ sites:
     icon: https://alshhbaa.com/assets/favicons/favicon-96.png
   - name: محرك الرسائل (API)
     url: https://formsubmit.co
-    method: GET
+    expectedStatusCodes:
+      - 200
+      - 403
 
 status-website:
   cname: status.alshhbaa.com
   name: نحاسيات الشهباء
   logoUrl: https://alshhbaa.com/assets/logo-gold.svg
   favicon: https://alshhbaa.com/assets/favicons/favicon-48.png
-  theme: dark
+  themeUrl: /alshhbaa-theme.css
   introTitle: "**نحاسيات الشهباء** — حالة الخدمات"
   introMessage: "مراقبة مباشرة لحالة جميع خدماتنا الإلكترونية. يتم التحقق كل 5 دقائق تلقائياً."
   navbar:
@@ -53,64 +55,6 @@ status-website:
       font-weight: 700;
       font-display: swap;
     }
-    :root {
-      --body-background-color: #002d24;
-      --body-text-color: #f4ede3;
-      --card-background-color: rgba(255,255,255,0.03);
-      --nav-background-color: #002d24;
-      --nav-border-bottom-color: rgba(200,165,107,0.2);
-      --nav-current-border-bottom-color: #c8a56b;
-      --card-border-color: rgba(200,165,107,0.15);
-      --down-border-left-color: #f87171;
-      --down-background-color: rgba(127,29,29,0.3);
-      --degraded-border-left-color: #f4c66b;
-      --up-border-left-color: #2ecc71;
-      --tag-color: #002d24;
-      --tag-up-background-color: #2ecc71;
-      --tag-down-background-color: #f87171;
-      --tag-degraded-background-color: #f4c66b;
-      --change-background-color: #c8a56b;
-      --error-button-border-color: rgba(200,165,107,0.3);
-      --error-button-background-color: rgba(200,165,107,0.1);
-      --error-button-color: #c8a56b;
-      --submit-button-border-color: rgba(200,165,107,0.3);
-      --submit-button-background-color: rgba(200,165,107,0.1);
-      --submit-button-color: #c8a56b;
-      --graph-opacity: 0.9;
-      --graph-filter: sepia(30%) hue-rotate(10deg);
-    }
-    body {
-      font-family: 'Thmanyah Serif Text', serif !important;
-      direction: rtl;
-      background:
-        radial-gradient(circle at 60% 0%, rgba(200,165,107,0.1), transparent 40%),
-        #002d24 !important;
-      -webkit-font-smoothing: antialiased;
-    }
-    h1, h2, h3 {
-      font-family: 'Thmanyah Serif Display', serif !important;
-      letter-spacing: 0.02em;
-    }
-    nav, nav a, button, .tag, .badge, footer {
-      font-family: 'Thmanyah Sans', sans-serif !important;
-    }
-    nav {
-      backdrop-filter: blur(12px) saturate(1.3);
-      background: rgba(0,45,36,0.85) !important;
-    }
-    .card, article {
-      backdrop-filter: blur(10px);
-      border-radius: 12px !important;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-      transition: border-color 0.3s ease, transform 0.3s ease;
-    }
-    .card:hover, article:hover {
-      border-color: rgba(200,165,107,0.3) !important;
-      transform: translateY(-2px);
-    }
-    a { color: #c8a56b !important; text-decoration: none; }
-    a:hover { opacity: 0.8; }
-    ::selection { background: rgba(200,165,107,0.35); }
     </style>
 
 # Arabic i18n — full label translation
