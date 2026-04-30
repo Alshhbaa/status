@@ -11,10 +11,14 @@ sites:
     url: https://alshhbaa.com
     icon: https://alshhbaa.com/assets/favicons/favicon-96.png
   - name: API
-    url: https://formsubmit.co
+    url: https://formsubmit.co/alshhbaa.r@gmail.com
+    method: POST
+    headers:
+      - "Accept: application/json"
+      - "Content-Type: application/x-www-form-urlencoded"
+    body: "name=Upptime%20Synthetic%20Check&email=monitor%40example.invalid&message=synthetic%20health%20check%20-%20ignored%20by%20honeypot&_subject=Synthetic%20monitor%20check&_captcha=false&_template=table&_honey=synthetic-monitor"
     expectedStatusCodes:
       - 200
-      - 403
 
 status-website:
   cname: status.alshhbaa.com
