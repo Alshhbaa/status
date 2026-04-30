@@ -1,0 +1,34 @@
+# Upptime configuration for Nhasiat Al-Shhbaa status page
+# Docs: https://upptime.js.org/docs/configuration
+
+owner: Alshhbaa
+repo: status
+
+sites:
+  - name: Al-Shhbaa Website
+    url: https://alshhbaa.com
+    icon: https://alshhbaa.com/assets/favicons/favicon-96.png
+  - name: Contact Page
+    url: https://alshhbaa.com/contact
+  - name: English Website
+    url: https://alshhbaa.com/en
+
+  # Uncomment when shop.alshhbaa.com launches:
+  # - name: Al-Shhbaa Shop
+  #   url: https://shop.alshhbaa.com
+
+status-website:
+  cname: status.alshhbaa.com
+  name: نحاسيات الشهباء
+  logoUrl: https://alshhbaa.com/assets/favicons/favicon-96.png
+  favicon: https://alshhbaa.com/assets/favicons/favicon-48.png
+  theme: dark
+  introTitle: "**نحاسيات الشهباء** — حالة الخدمات"
+  introMessage: "مراقبة مباشرة لحالة جميع خدماتنا الإلكترونية. يتم التحقق كل 5 دقائق تلقائياً."
+  navbar:
+    - title: Status
+      href: /
+    - title: GitHub
+      href: https://github.com/$OWNER/$REPO
+    - title: alshhbaa.com
+      href: https://alshhbaa.com
