@@ -9,7 +9,7 @@ user-agent: Nhasiat-Alshhbaa-Status-Bot
 sites:
   - name: Website
     url: https://alshhbaa.com
-    icon: https://alshhbaa.com/assets/favicons/favicon-96.png
+    icon: https://alshhbaa.com/favicon-96x96.png
   - name: API
     url: https://formsubmit.co/alshhbaa.r@gmail.com
     method: POST
@@ -31,9 +31,9 @@ status-website:
       href: /
     - title: الموقع الرئيسي
       href: https://alshhbaa.com
-  logoUrl: https://alshhbaa.com/assets/logo-gold.svg
+  logoUrl: https://alshhbaa.com/assets/logo.webp
   hideNavTitle: true
-  favicon: https://alshhbaa.com/assets/favicons/favicon-48.png
+  favicon: https://alshhbaa.com/favicon.svg
   customHeadHtml: >-
     <script>
       const OriginalDateTimeFormat = Intl.DateTimeFormat;
@@ -239,7 +239,7 @@ status-website:
       direction: rtl;
       text-align: right;
       background:
-        url('https://alshhbaa.com/assets/images/leather-pattern-luxury.webp'),
+        url('https://alshhbaa.com/assets/images/leather-pattern.webp'),
         radial-gradient(ellipse at 30% 0%, rgba(200,165,107,0.06) 0%, transparent 60%),
         radial-gradient(ellipse at 70% 100%, rgba(200,165,107,0.04) 0%, transparent 50%),
         #0a0806 !important;
