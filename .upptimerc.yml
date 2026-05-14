@@ -36,17 +36,25 @@ status-website:
   favicon: https://alshhbaa.com/favicon.svg
   customHeadHtml: >-
     <script>
-      const OriginalDateTimeFormat = Intl.DateTimeFormat;
-      Intl.DateTimeFormat = function(locale, options) {
-        return new OriginalDateTimeFormat('en-US', options);
-      };
-      Intl.DateTimeFormat.prototype = OriginalDateTimeFormat.prototype;
+      (function() {
+        const OriginalDateTimeFormat = Intl.DateTimeFormat;
+        const SafeDateTimeFormat = function(locale, options) {
+          if (!(this instanceof SafeDateTimeFormat)) return new OriginalDateTimeFormat('en-US', options);
+          return new OriginalDateTimeFormat('en-US', options);
+        };
+        Object.setPrototypeOf(SafeDateTimeFormat, OriginalDateTimeFormat);
+        SafeDateTimeFormat.prototype = OriginalDateTimeFormat.prototype;
+        Intl.DateTimeFormat = SafeDateTimeFormat;
 
-      const OriginalNumberFormat = Intl.NumberFormat;
-      Intl.NumberFormat = function(locale, options) {
-        return new OriginalNumberFormat('en-US', options);
-      };
-      Intl.NumberFormat.prototype = OriginalNumberFormat.prototype;
+        const OriginalNumberFormat = Intl.NumberFormat;
+        const SafeNumberFormat = function(locale, options) {
+          if (!(this instanceof SafeNumberFormat)) return new OriginalNumberFormat('en-US', options);
+          return new OriginalNumberFormat('en-US', options);
+        };
+        Object.setPrototypeOf(SafeNumberFormat, OriginalNumberFormat);
+        SafeNumberFormat.prototype = OriginalNumberFormat.prototype;
+        Intl.NumberFormat = SafeNumberFormat;
+      })();
 
       const arabicDigits = /[\u0660-\u0669\u06f0-\u06f9]/g;
       const hasArabicDigits = /[\u0660-\u0669\u06f0-\u06f9]/;
@@ -58,33 +66,18 @@ status-website:
       };
       const normalizeNumbers = value => value.replace(arabicDigits, digit => digitMap[digit] || digit);
 
-      function normalizeTextNode(node) {
-        if (node.nodeType === Node.TEXT_NODE && hasArabicDigits.test(node.nodeValue)) {
-          node.nodeValue = normalizeNumbers(node.nodeValue);
-        }
-      }
-
       function translateAndInject() {
-        document.querySelectorAll('a, h1, h2, h3, h4, p, span, strong, label, text, title').forEach(el => {
+        document.querySelectorAll('article h3, article p, .site-status, .card, .lead, footer').forEach(el => {
           el.childNodes.forEach(node => {
-            normalizeTextNode(node);
             if (node.nodeType === Node.TEXT_NODE) {
               let text = node.nodeValue;
+              if (hasArabicDigits.test(text)) node.nodeValue = normalizeNumbers(text);
               if (text.includes('Website') && !text.includes('الموقع')) {
                 node.nodeValue = text.replace(/Website/g, 'الموقع الرئيسي');
               }
               if (text.includes('API') && !text.includes('محرك')) {
                 node.nodeValue = text.replace(/API/g, 'محرك الرسائل (API)');
               }
-            }
-          });
-        });
-
-        document.querySelectorAll('[aria-label], [title], [alt]').forEach(el => {
-          ['aria-label', 'title', 'alt'].forEach(attr => {
-            const value = el.getAttribute(attr);
-            if (value && hasArabicDigits.test(value)) {
-              el.setAttribute(attr, normalizeNumbers(value));
             }
           });
         });
@@ -106,7 +99,9 @@ status-website:
 
             const copyDiv = document.createElement('div');
             copyDiv.className = 'dashboard-copy';
-            Array.from(card.childNodes).forEach(child => copyDiv.appendChild(child));
+            Array.from(card.childNodes).forEach(child => {
+              if (child !== graphDiv) copyDiv.appendChild(child);
+            });
 
             card.appendChild(graphDiv);
             card.appendChild(copyDiv);
@@ -114,12 +109,15 @@ status-website:
         }
       }
 
-      const observer = new MutationObserver(() => translateAndInject());
       document.addEventListener('DOMContentLoaded', () => {
         translateAndInject();
-        observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+        const observer = new MutationObserver((mutations) => {
+          const hasNewNodes = mutations.some(m => m.addedNodes.length > 0);
+          if (hasNewNodes) translateAndInject();
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
       });
-      setInterval(translateAndInject, 1000);
+      setInterval(translateAndInject, 5000);
     </script>
     <style>
     @font-face {
@@ -202,6 +200,7 @@ status-website:
       align-self: center;
       direction: rtl;
       text-align: right;
+      padding-inline-start: 1.5rem;
     }
     .dashboard-card .dashboard-graph {
       grid-column: 1;
@@ -223,13 +222,11 @@ status-website:
     .dashboard-graph a {
       display: block;
     }
-    /* Scope graph image styling to avoid blowing up favicons */
     .graph img, .dashboard-graph img {
       width: 100%;
       height: auto;
       border-radius: 8px;
     }
-    /* Ensure uptime bars are visible */
     [data-uptime] {
       opacity: 1 !important;
       z-index: 10;
@@ -254,7 +251,6 @@ status-website:
     main .container {
       max-width: 920px;
     }
-    /* ═══ NAVBAR — Clean glass style matching main site ═══ */
     nav {
       backdrop-filter: blur(40px) saturate(2) !important;
       -webkit-backdrop-filter: blur(40px) saturate(2) !important;
@@ -309,7 +305,6 @@ status-website:
     .logo img:hover {
       filter: drop-shadow(0 0 20px rgba(200, 165, 107, 0.35));
     }
-    /* ═══ HEADINGS ═══ */
     h1 {
       font-family: 'Thmanyah Serif Display', serif !important;
       font-feature-settings: 'salt' 1, 'ss01' 1, 'ss02' 1;
@@ -327,7 +322,6 @@ status-website:
     nav, nav a, button, label, .tag, .badge, footer, input {
       font-family: 'Thmanyah Sans', sans-serif !important;
     }
-    /* ═══ GRAPH CARDS ═══ */
     article.graph {
       background: linear-gradient(180deg, rgba(255, 248, 239, 0.06), rgba(255, 248, 239, 0.025)) !important;
       backdrop-filter: blur(20px) saturate(1.4) !important;
@@ -362,7 +356,6 @@ status-website:
     article.graph:hover::after {
       opacity: 1;
     }
-    /* ═══ GRAPH IMAGE DISPLAY — only graph images, not favicons ═══ */
     article.graph .graph-container img,
     article.graph .graph-container svg,
     article.graph img[alt*="graph"],
@@ -376,7 +369,6 @@ status-website:
       border-radius: 1rem;
       opacity: 0.9;
     }
-    /* Keep icons small */
     article.graph .icon,
     article.graph .icon img {
       width: auto !important;
@@ -385,7 +377,6 @@ status-website:
       height: 13px !important;
       border-radius: 0 !important;
     }
-    /* ═══ STATUS CARDS ═══ */
     .site-status, .card {
       backdrop-filter: blur(20px) saturate(1.4) !important;
       border-radius: 1.5rem !important;
@@ -393,11 +384,9 @@ status-website:
       border: 1px solid rgba(235, 216, 182, 0.16) !important;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
     }
-    /* Fix dark icon for FormSubmit */
     article:nth-of-type(2) .icon {
       filter: invert(1) brightness(1.5) contrast(1.2) !important;
     }
-    /* ═══ LINKS ═══ */
     a {
       color: #c8a56b !important;
       text-decoration: none;
@@ -407,7 +396,6 @@ status-website:
       opacity: 0.85;
       text-shadow: 0 0 12px rgba(200, 165, 107, 0.2);
     }
-    /* ═══ PERIOD FILTER LABELS ═══ */
     .f { direction: rtl; text-align: right; }
     .f.r, form.f.r { direction: rtl; }
     .r label {
@@ -430,7 +418,6 @@ status-website:
       color: #c8a56b !important;
       box-shadow: 0 0 12px rgba(200, 165, 107, 0.1);
     }
-    /* ═══ LAYOUT & MISC ═══ */
     .site-status .content { text-align: right; }
     footer {
       opacity: 0.45;
@@ -471,7 +458,6 @@ status-website:
       margin-block: 0.85rem !important;
     }
     .icon { margin-right: 0 !important; margin-left: 0.33rem !important; }
-    /* ═══ ERROR PAGE FIX ═══ */
     .error-page, .error {
       direction: rtl;
       text-align: center;
@@ -479,7 +465,6 @@ status-website:
     .error-page h1 {
       font-size: 1.5rem !important;
     }
-    /* ═══ RESPONSIVE ═══ */
     @media (max-width: 640px) {
       nav .container { flex-direction: column; align-items: center; }
       nav ul { justify-content: center; gap: 0.5rem; }
@@ -501,6 +486,7 @@ status-website:
       .dashboard-card .dashboard-graph img { height: 72px !important; }
       .dashboard-card .dashboard-copy {
         text-align: right;
+        padding-inline-start: 0;
       }
     }
     </style>
